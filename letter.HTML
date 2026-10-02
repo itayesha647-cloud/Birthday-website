@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Letter For You</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            #6d2438 0%,
+            #43101f 45%,
+            #21050d 100%
+        );
+
+    color: white;
+    font-family: Georgia, serif;
+    overflow: hidden;
+}
+
+
+/* SOFT BACKGROUND GLOW */
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    width: 500px;
+    height: 500px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background: rgba(255, 150, 175, 0.12);
+
+    filter: blur(100px);
+
+    pointer-events: none;
+}
+
+
+/* PAGE */
+
+.page {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 50px 20px;
+}
+
+
+/* TITLE */
+
+h1 {
+    margin: 0;
+
+    font-family:
+        "Brush Script MT",
+        "Segoe Script",
+        cursive;
+
+    font-size: 58px;
+
+    font-weight: normal;
+
+    color: #ffe6eb;
+
+    text-shadow:
+        0 0 10px #ff9db3,
+        0 0 25px rgba(255, 130, 155, .5);
+}
+
+
+/* INSTRUCTION */
+
+.instruction {
+    margin-top: 8px;
+
+    color: #f0c7cf;
+
+    font-size: 14px;
+
+    letter-spacing: 2px;
+}
+
+
+/* DECORATION */
+
+.decor {
+    margin: 18px 0;
+
+    color: #f2aebb;
+
+    font-size: 18px;
+
+    letter-spacing: 8px;
+}
+
+
+/* =========================
+   ENVELOPE
+========================= */
+
+.envelope {
+    position: relative;
+
+    width: 360px;
+
+    max-width: 90vw;
+
+    height: 245px;
+
+    margin-top: 20px;
+
+    cursor: pointer;
+
+    perspective: 1000px;
+
+    transition: .4s ease;
+}
+
+.envelope:hover {
+    transform:
+        translateY(-8px)
+        scale(1.03);
+}
+
+
+/* ENVELOPE BODY */
+
+.envelope-body {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    left: 0;
+    bottom: 0;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #d9b5bc,
+            #b98b95
+        );
+
+    border: 2px solid #ead4d8;
+
+    box-shadow:
+        0 25px 50px rgba(0,0,0,.55),
+        0 8px 20px rgba(0,0,0,.3),
+        inset 0 0 20px rgba(255,255,255,.35);
+
+    overflow: hidden;
+}
+
+
+/* PAPER SHINE */
+
+.envelope-body::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            120deg,
+            rgba(255,255,255,.28),
+            transparent 40%,
+            rgba(120,50,65,.12)
+        );
+
+    pointer-events: none;
+}
+
+
+/* LEFT FOLD */
+
+.left-fold {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-top: 125px solid transparent;
+
+    border-left: 180px solid #cba0a8;
+
+    z-index: 2;
+}
+
+
+/* RIGHT FOLD */
+
+.right-fold {
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-top: 125px solid transparent;
+
+    border-right: 180px solid #a97883;
+
+    z-index: 2;
+}
+
+
+/* TOP FLAP */
+
+.flap {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 0;
+    height: 0;
+
+    border-left: 180px solid transparent;
+
+    border-right: 180px solid transparent;
+
+    border-top: 135px solid #c9a0a8;
+
+    z-index: 4;
+
+    filter:
+        drop-shadow(
+            0 3px 3px rgba(80,20,35,.3)
+        );
+}
+
+
+/* LETTER INSIDE */
+
+.letter-paper {
+    position: absolute;
+
+    width: 270px;
+    height: 175px;
+
+    left: 50%;
+    bottom: 20px;
+
+    transform: translateX(-50%);
+
+    background:
+        linear-gradient(
+            135deg,
+            #fffaf5,
+            #f5e9df
+        );
+
+    border-radius: 5px;
+
+    box-shadow:
+        0 8px 18px rgba(0,0,0,.25);
+
+    z-index: 1;
+}
+
+
+/* PAPER LINES */
+
+.letter-paper::before {
+    content: "";
+
+    position: absolute;
+
+    left: 25px;
+    right: 25px;
+    top: 55px;
+
+    height: 2px;
+
+    background: #d8b8b8;
+
+    box-shadow:
+        0 18px #d8b8b8,
+        0 36px #d8b8b8;
+}
+
+
+/* HEART SEAL */
+
+.heart-seal {
+    position: absolute;
+
+    left: 50%;
+    top: 115px;
+
+    transform:
+        translate(-50%, -50%);
+
+    width: 48px;
+    height: 48px;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ff9caf,
+            #b73550
+        );
+
+    z-index: 6;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+
+    color: white;
+
+    border: 2px solid #ffd7de;
+
+    box-shadow:
+        0 5px 15px rgba(80,10,25,.35),
+        0 0 15px rgba(255,120,145,.45);
+
+    transition: .3s ease;
+}
+
+
+.envelope:hover .heart-seal {
+    transform:
+        translate(-50%, -50%)
+        scale(1.12)
+        rotate(-5deg);
+}
+
+
+/* OPENING LETTER */
+
+.open-text {
+    position: absolute;
+
+    z-index: 7;
+
+    left: 50%;
+
+    bottom: -48px;
+
+    transform:
+        translateX(-50%);
+
+    padding: 11px 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8e4053,
+            #652536
+        );
+
+    color: #fff0f3;
+
+    border: 1px solid #d58a9a;
+
+    border-radius: 25px;
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 7px 18px rgba(0,0,0,.35);
+
+    transition: .3s ease;
+}
+
+
+.envelope:hover .open-text {
+    background:
+        linear-gradient(
+            135deg,
+            #a14c61,
+            #793047
+        );
+
+    transform:
+        translateX(-50%)
+        translateY(-3px);
+}
+
+
+/* BOTTOM DECORATION */
+
+.bottom {
+    margin-top: 80px;
+
+    color: #f0aebb;
+
+    font-size: 21px;
+
+    letter-spacing: 9px;
+
+    text-shadow:
+        0 0 10px rgba(255,150,175,.3);
+}
+
+
+/* SMALL LINE */
+
+.small-line {
+    margin-top: 12px;
+
+    color: #d19aa6;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    h1 {
+        font-size: 48px;
+    }
+
+    .envelope {
+        width: 310px;
+        height: 215px;
+    }
+
+    .flap {
+        border-left-width: 155px;
+        border-right-width: 155px;
+        border-top-width: 120px;
+    }
+
+    .left-fold {
+        border-left-width: 155px;
+        border-top-width: 110px;
+    }
+
+    .right-fold {
+        border-right-width: 155px;
+        border-top-width: 110px;
+    }
+
+    .letter-paper {
+        width: 235px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="page">
+
+    <h1>A Letter, For You</h1>
+
+
+    <div class="instruction">
+        Tap here to read your message
+    </div>
+
+
+    <div class="decor">
+        ── ♡ ──
+    </div>
+
+
+    <!-- ENVELOPE -->
+
+    <div
+        class="envelope"
+        onclick="openLetter()"
+    >
+
+        <!-- LETTER INSIDE -->
+
+        <div class="letter-heart"></div>
+
+
+        <!-- ENVELOPE BODY -->
+
+        <div class="envelope-body"></div>
+
+
+        <!-- LEFT FOLD -->
+
+        <div class="left-fold"></div>
+
+
+        <!-- RIGHT FOLD -->
+
+        <div class="right-fold"></div>
+
+
+        <!-- TOP FLAP -->
+
+        <div class="flap"></div>
+
+
+        <!-- HEART SEAL -->
+
+        <div class="heart-seal">
+            ♥
+        </div>
+
+
+        <!-- OPENING BUTTON -->
+
+        <div class="open-text">
+            Opening Letter ♡
+        </div>
+
+    </div>
+
+
+    <!-- BOTTOM DECORATION -->
+
+    <div class="bottom">
+        ♡ ───── ♡ ───── ♡
+    </div>
+
+
+    <div class="small-line">
+        A little surprise made just for you
+    </div>
+
+</div>
+
+
+<script>
+
+function openLetter() {
+
+    window.location.href = "message.html";
+
+}
+
+</script>
+
+</body>
+</html>

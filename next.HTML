@@ -1,0 +1,134 @@
+<html>
+<head>
+    <title>It's Your Special Day</title>
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            text-align: center;
+            background: rgb(70, 4, 4);
+            color: white;
+            font-family: Georgia, serif;
+            overflow: hidden;
+        }
+
+        /* Falling petals */
+        .petal {
+            position: fixed;
+            top: -50px;
+            font-size: 22px;
+            animation: fall linear infinite;
+            opacity: 0.9;
+            z-index: 0;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding-top: 30px;
+        }
+
+        /* Rose */
+        .rose {
+            font-size: 75px;
+            filter: drop-shadow(0 0 12px pink);
+            margin-bottom: 5px;
+        }
+
+        h1 {
+            font-family: "Brush Script MT", cursive;
+            font-size: 42px;
+            font-weight: normal;
+            color: #ffd6df;
+            text-shadow: 0 0 12px #ff9aaa;
+            margin: 5px 0 15px;
+        }
+
+        .line {
+            color: #ffb6c1;
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+
+        .dp {
+            width: 155px;
+            height: 155px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ffb6c1;
+            box-shadow: 0 0 20px #ff8fa3;
+        }
+
+        .message {
+            font-family: "Segoe Script", cursive;
+            font-size: 21px;
+            color: #ffe5e9;
+            margin-top: 22px;
+        }
+
+        button {
+            margin-top: 20px;
+            background: #ffb6c1;
+            color: #5a1723;
+            border: none;
+            padding: 13px 40px;
+            border-radius: 14px;
+            font-size: 18px;
+            font-family: Georgia, serif;
+            cursor: pointer;
+            box-shadow: 0 0 18px #ff8fa3;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Falling petals -->
+    <div class="petal" style="left:5%; animation-duration:6s;">🌸</div>
+    <div class="petal" style="left:15%; animation-duration:8s;">🌹</div>
+    <div class="petal" style="left:25%; animation-duration:7s;">🌸</div>
+    <div class="petal" style="left:38%; animation-duration:9s;">🌹</div>
+    <div class="petal" style="left:50%; animation-duration:6s;">🌸</div>
+    <div class="petal" style="left:62%; animation-duration:8s;">🌹</div>
+    <div class="petal" style="left:75%; animation-duration:7s;">🌸</div>
+    <div class="petal" style="left:88%; animation-duration:10s;">🌹</div>
+
+    <div class="content">
+
+        <div class="lotus"></div>
+
+        <h1>It's Your Special Day</h1>
+
+        <div class="line">♡ ───── ♡ ───── ♡</div>
+
+        <img src="Aesthetic cat.jpg"
+             class="dp"
+             alt="Picture">
+
+        <p class="message">
+            I made something special for you....
+        </p>
+
+        <button onclick="window.location.href='cut.html'">
+            START
+        </button>
+
+    </div>
+
+</body>
+</html>       

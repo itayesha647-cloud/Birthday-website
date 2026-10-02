@@ -1,0 +1,26 @@
+<html>
+    <body style="text-align:center; background-color:rgb(70, 2, 17);">
+         <img src="Aesthetic cat.jpg" alt= "profile Picture"style="width:80px;border-radius:100%;">
+        <h1>Loading Something Special....</h1>
+        <p>.Just For You.</p>
+        <div style="width:200px; height:8px; background-color:white; margin:auto; border-radius:10px;">
+            <div id="bar" style="width:0%; height:100%; background-color:green; border-radius:10px;"></div>
+        </div>
+
+        <script>
+            let width = 0;
+
+            let loading = setInterval(function() {
+                width++;
+
+                document.getElementById("bar").style.width = width + "%";
+
+                if (width >= 100) {
+                    clearInterval(loading);
+                    window.location.href = "next.html";
+                }
+            }, 30);
+        </script>
+
+        </body>
+</html>

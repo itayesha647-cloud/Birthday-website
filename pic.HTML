@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Our Memories</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 50% 20%, #7a3045 0%, #4b101f 35%, #180308 100%);
+    color: white;
+    font-family: Georgia, serif;
+    overflow-x: hidden;
+}
+
+/* LIGHT EFFECT */
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 180, 200, 0.08);
+    filter: blur(100px);
+    pointer-events: none;
+}
+
+/* PAGE */
+
+.page {
+    min-height: 100vh;
+    padding: 45px 20px 60px;
+    text-align: center;
+}
+
+/* HEADING */
+
+.title {
+    font-family: "Brush Script MT", "Segoe Script", cursive;
+    font-size: 52px;
+    font-weight: normal;
+    color: #ffe4ea;
+
+    text-shadow:
+        0 0 8px rgba(255,170,190,.8),
+        0 0 25px rgba(255,120,150,.5);
+
+    margin: 0;
+}
+
+.subtitle {
+    margin-top: 8px;
+    color: #eac2cb;
+    font-size: 13px;
+    letter-spacing: 3px;
+}
+
+/* MEMORY CARD */
+
+.memory-area {
+    margin: 38px auto 0;
+    width: min(460px, 92vw);
+}
+
+.memory-card {
+    position: relative;
+    padding: 12px;
+
+    background: linear-gradient(
+        145deg,
+        #f7e9e8,
+        #d8c3c2
+    );
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 25px 50px rgba(0,0,0,.55),
+        0 8px 20px rgba(0,0,0,.35);
+
+    cursor: pointer;
+
+    transition:
+        transform .4s ease,
+        box-shadow .4s ease;
+}
+
+.memory-card:hover {
+    transform: translateY(-7px) rotate(-1deg);
+
+    box-shadow:
+        0 35px 65px rgba(0,0,0,.65),
+        0 0 25px rgba(255,150,175,.25);
+}
+
+/* PHOTO */
+
+.photo-frame {
+    position: relative;
+    width: 100%;
+    height: 430px;
+
+    background: #22050d;
+
+    overflow: hidden;
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        transform .8s ease,
+        opacity .4s ease;
+}
+
+.memory-card:hover img {
+    transform: scale(1.035);
+}
+
+/* PHOTO SHINE */
+
+.photo-frame::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.18),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+    transition: left .8s ease;
+}
+
+.memory-card:hover .photo-frame::after {
+    left: 130%;
+}
+
+/* CLICK LABEL */
+
+.click-label {
+    position: absolute;
+
+    bottom: 18px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    padding: 8px 17px;
+
+    background: rgba(20, 3, 8, .72);
+
+    backdrop-filter: blur(7px);
+
+    border: 1px solid rgba(255,255,255,.2);
+
+    border-radius: 30px;
+
+    font-size: 12px;
+
+    color: #fff1f4;
+
+    letter-spacing: 1px;
+
+    white-space: nowrap;
+}
+
+/* MEMORY NUMBER */
+
+.counter {
+    margin-top: 18px;
+
+    color: #eac1ca;
+
+    font-size: 13px;
+
+    letter-spacing: 3px;
+}
+
+/* MESSAGE */
+
+.message {
+    margin-top: 38px;
+
+    font-family:
+        "Segoe Script",
+        "Brush Script MT",
+        cursive;
+
+    font-size: 20px;
+
+    color: #ffe1e7;
+
+    text-shadow:
+        0 0 10px rgba(255,150,175,.3);
+}
+
+/* CONTINUE BUTTON */
+
+.continue-button {
+    margin-top: 22px;
+
+    padding: 12px 35px;
+
+    border: 1px solid rgba(255,255,255,.25);
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #cbb8e6,
+            #a88ccf
+        );
+
+    color: white;
+
+    font-size: 14px;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.35),
+        0 0 15px rgba(190,160,230,.25);
+
+    transition: .3s ease;
+}
+
+.continue-button:hover {
+    transform: translateY(-3px) scale(1.03);
+
+    box-shadow:
+        0 12px 25px rgba(0,0,0,.45),
+        0 0 25px rgba(200,170,240,.4);
+}
+
+/* FALLING FLOWERS */
+
+.petal {
+    position: fixed;
+
+    top: -40px;
+
+    font-size: 18px;
+
+    opacity: .7;
+
+    pointer-events: none;
+
+    z-index: 5;
+
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+
+    0% {
+        transform:
+            translateY(-40px)
+            rotate(0deg);
+    }
+
+    100% {
+        transform:
+            translateY(110vh)
+            rotate(360deg);
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .page {
+        padding-top: 35px;
+    }
+
+    .title {
+        font-size: 42px;
+    }
+
+    .photo-frame {
+        height: 380px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- FALLING FLOWERS -->
+
+<span class="petal" style="left:5%; animation-duration:7s;">🌸</span>
+<span class="petal" style="left:17%; animation-duration:9s;">🌸</span>
+<span class="petal" style="left:30%; animation-duration:6s;">🌸</span>
+<span class="petal" style="left:45%; animation-duration:8s;">🌸</span>
+<span class="petal" style="left:60%; animation-duration:10s;">🌸</span>
+<span class="petal" style="left:75%; animation-duration:7s;">🌸</span>
+<span class="petal" style="left:90%; animation-duration:9s;">🌸</span>
+
+
+<div class="page">
+
+    <h1 class="title">
+        Here is our Memories
+    </h1>
+
+    <div class="subtitle">
+        LITTLE MOMENTS • BEAUTIFUL MEMORIES
+    </div>
+
+
+    <!-- MEMORY -->
+
+    <div class="memory-area">
+
+        <div
+            class="memory-card"
+            onclick="nextPicture()"
+        >
+
+            <div class="photo-frame">
+
+                <img
+                    id="memoryImage"
+                    src="pic1.jpg"
+                    alt="Memory"
+                >
+
+                <div class="click-label">
+                    Click the picture ♡
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="counter"
+            id="counter"
+        >
+            MEMORY 01
+        </div>
+
+    </div>
+
+
+    <!-- MESSAGE -->
+
+    <div class="message">
+        This is your special day surprise ♡
+    </div>
+
+
+    <!-- CONTINUE -->
+
+    <button
+        class="continue-button"
+        onclick="goNext()"
+    >
+        Continue
+    </button>
+
+</div>
+
+
+<script>
+
+/* ==============================
+   YOUR MEMORY PICTURES
+   ============================== */
+
+const pictures = [
+
+    "pic1.jpg",
+    "pic2.jpg",
+    "pic3.jpg",
+    "pic4.jpg",
+    "pic5.jpg",
+    "pic6.jpg",
+    "pic7.jpg",
+    "pic8.jpg"
+
+];
+
+
+let currentPicture = 0;
+
+
+/* ==============================
+   CHANGE PICTURE
+   ============================== */
+
+function nextPicture() {
+
+    currentPicture++;
+
+    if (currentPicture >= pictures.length) {
+
+        currentPicture = 0;
+
+    }
+
+    const image =
+        document.getElementById("memoryImage");
+
+    image.style.opacity = "0";
+
+    setTimeout(function() {
+
+        image.src =
+            pictures[currentPicture];
+
+        image.onload = function() {
+
+            image.style.opacity = "1";
+
+        };
+
+    }, 200);
+
+
+    document.getElementById("counter").innerText =
+        "MEMORY " +
+        String(currentPicture + 1).padStart(2, "0");
+
+}
+
+
+/* ==============================
+   CONTINUE → LETTER
+   ============================== */
+
+function goNext() {
+
+    window.location.href =
+        "letter.html";
+
+}
+
+</script>
+
+</body>
+</html>

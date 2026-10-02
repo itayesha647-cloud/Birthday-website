@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday Cutie</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #681b2b 0%,
+            #430b18 48%,
+            #190208 100%
+        );
+
+    color: white;
+    text-align: center;
+    font-family: Georgia, serif;
+}
+
+/* PAGE */
+
+.page {
+    position: relative;
+    min-height: 100vh;
+    padding-top: 22px;
+    z-index: 5;
+}
+
+/* TOP */
+
+.little {
+    font-size: 12px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #e9bdc6;
+    margin-bottom: 7px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 48px;
+    font-weight: normal;
+    color: #fff0f3;
+
+    text-shadow:
+        0 0 8px #ff9aaa,
+        0 0 22px rgba(255,120,145,.55);
+}
+
+.cutie {
+    font-family:
+        "Brush Script MT",
+        "Segoe Script",
+        cursive;
+
+    font-size: 62px;
+    color: #ffb8c6;
+
+    text-shadow:
+        0 0 10px #ff718c,
+        0 0 25px rgba(255,100,130,.5);
+}
+
+/* LINE */
+
+.divider {
+    width: 180px;
+    height: 1px;
+    margin: 14px auto;
+
+    background:
+        linear-gradient(
+            to right,
+            transparent,
+            #e8a0ad,
+            transparent
+        );
+}
+
+/* SPECIAL */
+
+.special {
+    font-family:
+        "Segoe Script",
+        "Brush Script MT",
+        cursive;
+
+    font-size: 19px;
+    color: #f5d7dc;
+}
+
+/* PETALS */
+
+.petal {
+    position: fixed;
+    top: -50px;
+
+    color: #ffb5c1;
+    font-size: 20px;
+    opacity: .85;
+
+    z-index: 1;
+    pointer-events: none;
+
+    animation: falling linear infinite;
+}
+
+@keyframes falling {
+
+    0% {
+        transform:
+            translateY(-50px)
+            rotate(0deg);
+    }
+
+    100% {
+        transform:
+            translateY(110vh)
+            rotate(360deg);
+    }
+}
+
+/* CAKE AREA */
+
+.cake-area {
+    position: relative;
+
+    width: 650px;
+    max-width: 95vw;
+    height: 430px;
+
+    margin: 5px auto 0;
+}
+
+/* MAIN CAKE */
+
+.cake {
+    position: absolute;
+
+    width: 420px;
+    height: 340px;
+
+    left: 50%;
+    top: 8px;
+
+    transform: translateX(-50%);
+
+    z-index: 4;
+
+    transition: .8s ease;
+}
+
+.cake img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+    display: block;
+
+    filter:
+        drop-shadow(
+            0 18px 25px
+            rgba(0,0,0,.5)
+        );
+}
+
+/* CUT PIECE */
+
+.slice {
+    position: absolute;
+
+    width: 120px;
+    height: 145px;
+
+    left: 50%;
+    top: 120px;
+
+    margin-left: 80px;
+
+    z-index: 8;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    transform:
+        translate(0,0)
+        rotate(0deg);
+
+    transition: 1s ease;
+}
+
+.slice img {
+    position: absolute;
+
+    width: 420px;
+    height: 340px;
+
+    max-width: none;
+
+    left: -285px;
+    top: -105px;
+
+    object-fit: contain;
+}
+
+/* KNIFE */
+
+.knife {
+    position: absolute;
+
+    width: 190px;
+    height: 55px;
+
+    right: 3%;
+    top: 150px;
+
+    transform: rotate(-17deg);
+
+    cursor: pointer;
+
+    z-index: 15;
+
+    transition: .7s ease;
+
+    filter:
+        drop-shadow(
+            0 5px 8px
+            rgba(0,0,0,.65)
+        );
+}
+
+/* BLADE */
+
+.blade {
+    position: absolute;
+
+    right: 40px;
+    top: 8px;
+
+    width: 145px;
+    height: 31px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #c5c7ca,
+            #f8f8f8
+        );
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            88% 100%,
+            0 100%
+        );
+
+    border-radius: 3px;
+}
+
+/* HANDLE */
+
+.handle {
+    position: absolute;
+
+    right: 0;
+    top: 7px;
+
+    width: 52px;
+    height: 33px;
+
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #70152a,
+            #ee9aaa,
+            #70152a
+        );
+
+    box-shadow:
+        inset 0 0 5px
+        rgba(255,255,255,.45);
+}
+
+/* KNIFE HOVER */
+
+.knife:hover {
+    transform:
+        rotate(-17deg)
+        scale(1.08);
+}
+
+/* TEXT */
+
+.instruction {
+    margin-top: -7px;
+
+    font-family:
+        "Segoe Script",
+        "Brush Script MT",
+        cursive;
+
+    font-size: 17px;
+    color: #efc6cd;
+
+    transition: .5s;
+}
+
+/* =================================
+   AFTER CUT
+   سیدھا triangular cake slice
+   ================================= */
+
+.cut .knife {
+    transform:
+        rotate(-40deg)
+        translate(-100px,70px);
+
+    opacity: 0;
+}
+
+/* MAIN CAKE AFTER CUT */
+
+.cut .cake {
+    transform:
+        translateX(-50%)
+        scale(.98);
+
+    /*
+       RIGHT SIDE سے
+       سیدھا triangular piece نکلے گا
+    */
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            100% 43%,
+            70% 58%,
+            100% 73%,
+            100% 100%,
+            0 100%
+        );
+}
+
+/* PIECE AFTER CUT */
+
+.cut .slice {
+    opacity: 1;
+
+    transform:
+        translate(125px,25px)
+        rotate(8deg);
+}
+
+/* HIDE TEXT */
+
+.cut .instruction {
+    opacity: 0;
+}
+
+
+/* CLICK HERE BUTTON */
+
+.next-button {
+    margin-top: 25px;
+
+    padding: 11px 30px;
+
+    border: none;
+
+    border-radius: 25px;
+
+    background: #c9b6e4;
+
+    color: white;
+
+    font-size: 14px;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 12px
+        rgba(0,0,0,.25);
+
+    transition: .3s ease;
+}
+
+.next-button:hover {
+    background: #bba5d9;
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    h1 {
+        font-size: 35px;
+    }
+
+    .cutie {
+        font-size: 48px;
+    }
+
+    .special {
+        font-size: 16px;
+    }
+
+    .cake-area {
+        height: 350px;
+    }
+
+    .cake {
+        width: 350px;
+        height: 285px;
+    }
+
+    .slice {
+        width: 100px;
+        height: 125px;
+
+        margin-left: 70px;
+    }
+
+    .slice img {
+        width: 350px;
+        height: 350px;
+
+        left: -240px;
+        top: -100px;
+    }
+
+    .knife {
+        right: -15px;
+        top: 135px;
+
+        transform:
+            rotate(-17deg)
+            scale(.7);
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- FALLING PETALS -->
+
+<span class="petal"
+style="left:4%; animation-duration:7s;">🌸</span>
+
+<span class="petal"
+style="left:14%; animation-duration:9s;">🌸</span>
+
+<span class="petal"
+style="left:25%; animation-duration:6s;">🌸</span>
+
+<span class="petal"
+style="left:38%; animation-duration:8s;">🌸</span>
+
+<span class="petal"
+style="left:52%; animation-duration:10s;">🌸</span>
+
+<span class="petal"
+style="left:66%; animation-duration:7s;">🌸</span>
+
+<span class="petal"
+style="left:80%; animation-duration:9s;">🌸</span>
+
+<span class="petal"
+style="left:94%; animation-duration:6s;">🌸</span>
+
+
+<!-- PAGE -->
+
+<div class="page">
+
+    <div class="little">
+        A Little Celebration
+    </div>
+
+    <h1>
+        Happy Birthday
+    </h1>
+
+    <div class="cutie">
+        Cutie ♡
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="special">
+        Something special for you
+    </div>
+
+
+    <!-- CAKE -->
+
+    <div
+        class="cake-area"
+        id="cakeArea"
+    >
+
+        <!-- MAIN CAKE -->
+
+        <div class="cake">
+
+            <img
+                src="bn.png"
+                alt="Birthday Cake"
+            >
+
+        </div>
+
+
+        <!-- SEPARATE PIECE -->
+
+        <div class="slice">
+
+            <img
+                src="bn.png"
+                alt="Cake Piece"
+            >
+
+        </div>
+
+
+        <!-- KNIFE -->
+
+        <div
+            class="knife"
+            onclick="cutCake()"
+        >
+
+            <div class="blade"></div>
+
+            <div class="handle"></div>
+
+        </div>
+
+    </div>
+
+
+    <div class="instruction">
+        Click the knife to cut the cake
+    </div>
+
+
+    <!-- CLICK HERE -->
+
+    <button
+        class="next-button"
+        onclick="goNext()">
+
+        CLICK HERE →
+
+    </button>
+
+</div>
+
+
+<script>
+
+function cutCake() {
+
+    document
+        .getElementById("cakeArea")
+        .classList.add("cut");
+
+}
+
+
+function goNext() {
+
+    window.location.href =
+        "balloons.html";
+
+}
+
+</script>
+
+</body>
+</html>
